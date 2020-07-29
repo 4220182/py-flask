@@ -7,7 +7,7 @@ from flask import Flask, render_template, make_response
 import config
 
 app = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(config) #只识别大写 key.isupper()
 
 # 测试传递单个参数
 @app.route("/app")
