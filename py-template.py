@@ -1,10 +1,13 @@
 '''
 1. 模版放置在./templates目录下。
+2. config.py 是存放所有配置文件
 '''
 
 from flask import Flask, render_template, make_response
+import config
 
 app = Flask(__name__)
+app.config.from_object(config)
 
 # 测试传递单个参数
 @app.route("/app")
@@ -45,5 +48,7 @@ def process_request_send():
 # main
 if __name__ == '__main__':
     print("started.\n"
-          "url: 0.0.0.0:10000/\n")
+          "url: 0.0.0.0:10000/\n"
+          "app-debug: ", app.debug)
+    # 载入配置文件
     app.run(host="0.0.0.0",port=10000)
