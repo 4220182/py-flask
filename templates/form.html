@@ -1,0 +1,8 @@
+
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }}{{ form.name(size=80) }}
+        {{  form.username  }}
+        {{  form.recaptcha  }}
+        {{ form.submit() }}
+    </form>
