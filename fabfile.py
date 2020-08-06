@@ -133,6 +133,6 @@ def deploy(ctx):
 
 if __name__ == '__main__':
     host = "192.168.5.102"
-    conn = Connection(host,user='hjd')
+    conn = Connection(host, user='my-user', connect_kwargs={'password': 'password'})
     print(pull(conn, branch='master'))
 
