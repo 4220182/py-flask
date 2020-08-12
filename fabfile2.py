@@ -34,7 +34,7 @@ def deploy(c):
 
 def g_deploy():
     '''
-    SerialGroup(*hosts, **kwargs)：按串行方式执行操作
+    SerialGroup(*hosts, **kwargs)：按串行方式执行操作,当中有一台主机连接不上，后面的主机还可以执行。
     :return:
     '''
     with SerialGroup(*hosts) as g:
@@ -42,15 +42,15 @@ def g_deploy():
 
 def tg_deploy():
     '''
-    hreadingGroup(*hosts, **kwargs)：按并发方式执行操作
+    hreadingGroup(*hosts, **kwargs)：按并发方式执行操作,当中有一台主机连接不上，后面的主机还可以执行。
     :return:
     '''
     with ThreadingGroup(*hosts) as g:
       g.run('uname -s')
 
 if __name__ == '__main__':
-    base_test()
-    #config_test()
+    #base_test()
+    config_test()
 
     '''
     从yaml配置文件读取主机组：
@@ -62,9 +62,10 @@ if __name__ == '__main__':
     my_hosts = yaml.full_load(open("./my-hosts.yml"))
     hosts = my_hosts['web']
 
-    g_deploy()
-    tg_deploy()
+    #g_deploy()
+    #tg_deploy()
 
+    #for方式, 当中有一台主机连接不上，后面的主机不再执行。
     for host in hosts :
         conn = Connection(host)
         deploy(conn)
